@@ -3,7 +3,9 @@
 ===========================*/
 const express = require("express");
 const app = express();
-const port = 3003;
+const port = process.env.PORT || 3003;
+const MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/profiles";
 const mongoose = require("mongoose");
 const cors = require("cors");
 
@@ -16,10 +18,7 @@ const profilesController = require("./controllers/profile.js");
 /*=========================
         WHITELIST
 ===========================*/
-const whitelist = [
-  "http://localhost:3000",
-  "https://silly-shannon-7ce441.netlify.com"
-];
+const whitelist = ["http://localhost:3000"];
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -47,7 +46,7 @@ mongoose.connection.on("error", err =>
 
 mongoose.connection.on("disconnected", () => console.log("mongo disconnected"));
 
-mongoose.connect("mongodb://localhost:27017/profiles", {
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true
 });
 mongoose.connection.once("open", () => {
