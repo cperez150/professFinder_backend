@@ -18,7 +18,7 @@ const profilesController = require("./controllers/profile.js");
 /*=========================
         WHITELIST
 ===========================*/
-const whitelist = ["http://localhost:3000"];
+const whitelist = ["http://localhost:3000", "http://professfinder.surge.sh/"];
 
 const corsOptions = {
   origin: (origin, callback) => {
